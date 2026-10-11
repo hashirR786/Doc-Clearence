@@ -157,7 +157,7 @@ when any of these is true:
 
 - `prefers-reduced-motion: reduce`
 - viewport under 768px (mobile)
-- `navigator.connection` reports 2G/3G or Data Saver
+- `navigator.connection` reports 2G/slow-2G, or Data Saver is on
 - the file fails to load or decode
 - `enabled` is `false` for that video in `content/site.ts`
 

@@ -110,11 +110,23 @@ export default function ScrollVideoScene({
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const small = window.matchMedia('(max-width: 767px)').matches;
 
+    /**
+     * Deliberately only the genuinely slow cases.
+     *
+     * `effectiveType` is derived from recently observed throughput, so it
+     * dips to '3g' on perfectly good connections while the rest of the page
+     * is still downloading — which is exactly when this check runs. Treating
+     * '3g' as too slow meant ordinary desktop visitors silently got the
+     * poster and never saw the effect at all.
+     *
+     * Save-Data is an explicit request from the user and is always honoured.
+     * On a real 2g link the poster stays up and nothing is wasted.
+     */
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
       .connection;
     const slow =
       conn?.saveData === true ||
-      (conn?.effectiveType ? ['slow-2g', '2g', '3g'].includes(conn.effectiveType) : false);
+      (conn?.effectiveType ? ['slow-2g', '2g'].includes(conn.effectiveType) : false);
 
     setUseVideo(!reduced && !small && !slow);
   }, [enabled, near]);
