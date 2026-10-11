@@ -1,0 +1,19 @@
+# dependencies
+node_modules
+
+# builds
+.next
+.next-build
+out
+
+# env
+.env*.local
+
+# misc
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+
+# Source footage — the encoded, web-ready versions live in public/video/
+/video*.mp4
+/2nd.mp4

@@ -1,0 +1,149 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #0a1f44;
+    --gold: #c9a24b;
+    --gold-light: #e3c46f;
+    --cream: #f8f6f1;
+    --slateblue: #5b6784;
+    --header-h: 76px;
+  }
+
+  html {
+    /* Deliberately NOT scroll-behavior: smooth — it fights ScrollTrigger and
+       makes the scrubbed hero video stutter. */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-white font-sans text-navy antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headings use the serif face to echo the logo wordmark. */
+  h1, h2, h3, h4 {
+    @apply font-serif;
+    text-wrap: balance;
+  }
+
+  /* Arabic sets better in the UI face than in a Latin serif. */
+  [dir='rtl'] h1,
+  [dir='rtl'] h2,
+  [dir='rtl'] h3,
+  [dir='rtl'] h4 {
+    @apply font-arabic;
+    letter-spacing: 0;
+  }
+
+  [dir='rtl'] body {
+    @apply font-arabic;
+  }
+
+  /* Visible, consistent focus ring for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--gold-light);
+    color: var(--navy);
+  }
+}
+
+@layer components {
+  .container-page {
+    @apply mx-auto w-full max-w-content px-5 sm:px-8;
+  }
+
+  /* Small uppercase label with the thin gold rules from the logo tagline. */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-medium uppercase tracking-label text-gold;
+  }
+  .eyebrow::before,
+  .eyebrow::after {
+    content: '';
+    @apply h-px w-8 bg-gold/50;
+  }
+  .eyebrow-start::after {
+    display: none;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold
+           transition-all duration-300 focus-visible:outline-offset-4 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-gold {
+    @apply btn text-navy shadow-soft;
+    background-image: linear-gradient(100deg, #a8853a 0%, #c9a24b 35%, #e3c46f 70%, #c9a24b 100%);
+    background-size: 200% auto;
+  }
+  .btn-gold:hover {
+    background-position: right center;
+    @apply shadow-lift;
+  }
+
+  .btn-navy {
+    @apply btn bg-navy text-white hover:bg-navy-700 hover:shadow-lift;
+  }
+
+  .btn-outline {
+    @apply btn border border-navy/15 bg-white/0 text-navy hover:border-gold hover:text-gold-dark;
+  }
+
+  .btn-outline-light {
+    @apply btn border border-white/35 text-white hover:border-gold hover:bg-white/10;
+  }
+
+  .card {
+    @apply rounded-2xl border border-navy/[0.06] bg-white p-6 shadow-soft transition-all duration-300;
+  }
+  .card-hover:hover {
+    @apply -translate-y-1 border-gold/30 shadow-lift;
+  }
+
+  .gold-rule {
+    @apply h-px w-full bg-gradient-to-r from-transparent via-gold/40 to-transparent;
+  }
+
+  .prose-site {
+    @apply text-[1.0625rem] leading-[1.75] text-slateblue;
+  }
+  .prose-site p + p {
+    @apply mt-4;
+  }
+  .prose-site strong {
+    @apply font-semibold text-navy;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  /* Logical-property helpers so RTL mirrors automatically. */
+  .ps-gold-bar {
+    border-inline-start: 2px solid var(--gold);
+    padding-inline-start: 1rem;
+  }
+}
+
+/* Honour the user's motion preference everywhere. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
