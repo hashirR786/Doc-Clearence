@@ -10,6 +10,7 @@ import { locales, site, type Locale } from '@/content/site';
 import { t } from '@/content/ui';
 import { isLocale } from '@/lib/locale';
 import { localBusinessSchema, organizationSchema } from '@/lib/seo';
+import { assetPath } from '@/lib/asset';
 import '../globals.css';
 
 const playfair = Playfair_Display({
@@ -98,5 +99,7 @@ export default function LocaleLayout({
 
 export const metadata = {
   metadataBase: new URL(site.url),
-  icons: { icon: '/icon.png', apple: '/apple-icon.png' },
+  // assetPath: these are root-relative and would miss the sub-path on a
+  // GitHub Pages deployment otherwise.
+  icons: { icon: assetPath('/icon.png'), apple: assetPath('/apple-icon.png') },
 };

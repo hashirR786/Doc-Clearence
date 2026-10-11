@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { site, type Locale } from '@/content/site';
 import { href } from '@/lib/locale';
+import { assetPath } from '@/lib/asset';
 
 interface LogoProps {
   locale: Locale;
@@ -27,7 +28,10 @@ export default function Logo({
   height = 46,
   priority = false,
 }: LogoProps) {
-  const src = variant === 'light' ? '/images/logo-light.webp' : '/images/logo.webp';
+  // assetPath, not a bare path: with images.unoptimized (the static export
+  // for GitHub Pages) next/image emits the src verbatim and does NOT prefix
+  // basePath, so a sub-path deployment would 404 on the logo.
+  const src = assetPath(variant === 'light' ? '/images/logo-light.webp' : '/images/logo.webp');
 
   return (
     <Link
