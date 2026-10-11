@@ -86,11 +86,14 @@ export const site = {
     hero: {
       enabled: true,
       src: '/video/hero.mp4',
+      // Served below 768px — same footage, roughly a third of the bytes.
+      srcMobile: '/video/hero-mobile.mp4',
       poster: '/images/hero-poster.jpg',
     },
     services: {
       enabled: true,
       src: '/video/services.mp4',
+      srcMobile: '/video/services-mobile.mp4',
       poster: '/images/services-poster.jpg',
     },
   },

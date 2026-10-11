@@ -58,6 +58,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
       <ScrollVideoScene
         id="hero-scene"
         src={site.video.hero.src}
+        srcMobile={site.video.hero.srcMobile}
         poster={site.video.hero.poster}
         enabled={site.video.hero.enabled}
         overlay="navy"
@@ -71,6 +72,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
       {/* Scene 2 — brand motion graphic behind the services grid. */}
       <ScrollVideoScene
         src={site.video.services.src}
+        srcMobile={site.video.services.srcMobile}
         poster={site.video.services.poster}
         enabled={site.video.services.enabled}
         overlay="cream"

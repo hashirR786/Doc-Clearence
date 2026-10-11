@@ -6,6 +6,8 @@ import { assetPath } from '@/lib/asset';
 interface ScrollVideoSceneProps {
   /** Compressed MP4 with dense keyframes — see public/video/README.md */
   src: string;
+  /** Lighter encode of the same footage, served below 768px. */
+  srcMobile?: string;
   /** Shown before load, on mobile, on slow links and with reduced motion. */
   poster: string;
   /** false renders the poster only, with no video request. */
@@ -46,6 +48,7 @@ interface ScrollVideoSceneProps {
  */
 export default function ScrollVideoScene({
   src,
+  srcMobile,
   poster,
   enabled = true,
   overlay = 'navy',
@@ -57,6 +60,9 @@ export default function ScrollVideoScene({
   const sceneRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [useVideo, setUseVideo] = useState(false);
+  // Small screens get a much lighter encode of the same footage.
+  const [small, setSmall] = useState(false);
+  const activeSrc = small && srcMobile ? srcMobile : src;
   const [near, setNear] = useState(!lazy);
   const [failed, setFailed] = useState(false);
 
@@ -107,28 +113,27 @@ export default function ScrollVideoScene({
       }
     }
 
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const small = window.matchMedia('(max-width: 767px)').matches;
-
     /**
-     * Deliberately only the genuinely slow cases.
+     * Only two things switch the video off now.
      *
-     * `effectiveType` is derived from recently observed throughput, so it
-     * dips to '3g' on perfectly good connections while the rest of the page
-     * is still downloading — which is exactly when this check runs. Treating
-     * '3g' as too slow meant ordinary desktop visitors silently got the
-     * poster and never saw the effect at all.
+     * `prefers-reduced-motion` is an accessibility preference and is always
+     * honoured. Save-Data is an explicit request to spare the user's
+     * bandwidth, so it is too.
      *
-     * Save-Data is an explicit request from the user and is always honoured.
-     * On a real 2g link the poster stays up and nothing is wasted.
+     * `navigator.connection.effectiveType` is deliberately NOT consulted. It
+     * is derived from recently observed throughput, so it swings between
+     * values on a single connection — and because this check runs once while
+     * the rest of the page is still downloading, it made the whole effect
+     * appear intermittent: working on one load, silently falling back to the
+     * poster on the next. Bandwidth is handled instead by serving a much
+     * smaller file to small screens, and the poster covers the wait either
+     * way.
      */
-    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } })
-      .connection;
-    const slow =
-      conn?.saveData === true ||
-      (conn?.effectiveType ? ['slow-2g', '2g'].includes(conn.effectiveType) : false);
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
 
-    setUseVideo(!reduced && !small && !slow);
+    setSmall(window.matchMedia('(max-width: 767px)').matches);
+    setUseVideo(!reduced && conn?.saveData !== true);
   }, [enabled, near]);
 
   // Map the playhead onto the scene's scroll range.
@@ -163,8 +168,24 @@ export default function ScrollVideoScene({
         if (!duration || !isFinite(duration)) return;
         started = true;
 
-        // Scrubbing is smoother on a paused element.
-        video.pause();
+        /**
+         * Prime, then pause.
+         *
+         * Scrubbing is smoother on a paused element, but iOS Safari will not
+         * paint a frame for a video that has never played — seeking a
+         * never-played element leaves the poster frozen on screen. Starting
+         * playback for an instant and immediately pausing gets the decoder
+         * going so subsequent seeks actually render. It is allowed without a
+         * gesture because the element is muted and playsinline; if the
+         * browser refuses anyway, the catch keeps the scrub working on every
+         * platform that does not need this.
+         */
+        const primed = video.play();
+        if (primed && typeof primed.then === 'function') {
+          primed.then(() => video.pause()).catch(() => video.pause());
+        } else {
+          video.pause();
+        }
 
         /**
          * Push the scrubbed time onto the element.
@@ -252,7 +273,7 @@ export default function ScrollVideoScene({
       cancelled = true;
       cleanup?.();
     };
-  }, [useVideo, failed]);
+  }, [useVideo, failed, activeSrc]);
 
   const showVideo = useVideo && !failed;
   const veil = overlay === 'navy' ? 'bg-navy-veil' : 'bg-cream-veil';
@@ -279,7 +300,7 @@ export default function ScrollVideoScene({
               disablePictureInPicture
               onError={() => setFailed(true)}
             >
-              <source src={assetPath(src)} type="video/mp4" />
+              <source src={assetPath(activeSrc)} type="video/mp4" />
             </video>
           ) : (
             /* eslint-disable-next-line @next/next/no-img-element */

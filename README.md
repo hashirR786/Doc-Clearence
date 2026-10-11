@@ -152,14 +152,23 @@ and **making a scene taller makes its animation last longer**. The hero scene
 is about 2.4 viewport heights because three full-height sections are stacked
 inside it.
 
+Below 768px a **separate, much lighter encode** of the same footage is served
+(`*-mobile.mp4`, roughly a third of the bytes), so phones get the effect
+without the desktop file's weight.
+
 Each scene falls back to its static poster — with no video request at all —
 when any of these is true:
 
 - `prefers-reduced-motion: reduce`
-- viewport under 768px (mobile)
-- `navigator.connection` reports 2G/slow-2G, or Data Saver is on
+- Data Saver is on
 - the file fails to load or decode
 - `enabled` is `false` for that video in `content/site.ts`
+
+`navigator.connection.effectiveType` is deliberately **not** consulted. It is
+computed from recently observed throughput, so it swings between values on one
+connection — and since the check runs once, while the rest of the page is
+still downloading, it made the effect appear intermittent: working on one
+load, silently falling back on the next.
 
 The services video is additionally lazy: it is not fetched until the scene is
 within one viewport of being scrolled into view.

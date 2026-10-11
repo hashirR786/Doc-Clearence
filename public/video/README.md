@@ -2,10 +2,15 @@
 
 Two scroll-scrubbed videos back the homepage:
 
-| File           | Where it plays                          | Treatment                        |
-|----------------|-----------------------------------------|----------------------------------|
-| `hero.mp4`     | Hero + trust strip + brand statement     | Navy veil, light text over it    |
-| `services.mp4` | "What we do" services grid               | Cream veil, dark text over it    |
+| File                   | Where it plays                       | Treatment                     |
+|------------------------|--------------------------------------|-------------------------------|
+| `hero.mp4`             | Hero + trust strip + brand statement | Navy veil, light text over it |
+| `hero-mobile.mp4`      | the same, below 768px                | 960px wide, ~a third the size |
+| `services.mp4`         | "What we do" services grid           | Cream veil, dark text over it |
+| `services-mobile.mp4`  | the same, below 768px                | 960px wide                    |
+
+Re-encode the mobile pair whenever you replace the desktop one — same
+settings, with `-vf "scale=960:-2"` added.
 
 Current footage: an aerial UAE skyline at sunset for the hero, and navy
 passports and documents falling into a neat stack for the services grid.
