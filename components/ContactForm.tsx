@@ -65,17 +65,52 @@ export default function ContactForm({
     }
 
     setStatus('sending');
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+
+    /**
+     * Where the enquiry goes.
+     *
+     * On a Node host this is our own /api/contact route. On a static host
+     * (GitHub Pages) there is no server to run it, so point
+     * NEXT_PUBLIC_FORM_ENDPOINT at a hosted form service — see the README for
+     * the Formspree setup. Both are plain JSON POSTs.
+     */
+    const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT || '/api/contact';
+    const isExternal = /^https?:\/\//.test(endpoint);
+
+    const serviceName =
+      services.find((s) => s.slug === data.service)?.[locale].name ||
+      (data.service ? d.form.serviceOther : '—');
+
+    const payload = {
+      ...data,
+      locale,
+      elapsedMs: Date.now() - startedAt,
+      ...(isExternal
+        ? {
+            // Formspree reads _gotcha as its spam honeypot and _subject as the
+            // notification subject line; our own route reads `company`, so
+            // send both and let each pick up what it understands.
+            _gotcha: data.company || '',
+            _subject: `Website enquiry — ${serviceName}`,
+            // Readable label alongside the raw slug in the notification email.
+            serviceName,
+          }
+        : {}),
+    };
 
     try {
-      // On a static host (GitHub Pages) there is no /api route, so point
-      // NEXT_PUBLIC_FORM_ENDPOINT at a hosted form service instead.
-      const endpoint = process.env.NEXT_PUBLIC_FORM_ENDPOINT || '/api/contact';
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, locale, elapsedMs: Date.now() - startedAt }),
+        headers: {
+          'Content-Type': 'application/json',
+          // Without this Formspree answers with a redirect to its own thank
+          // you page instead of a JSON result.
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
       });
+
       if (!res.ok) throw new Error(String(res.status));
       setStatus('sent');
       form.reset();

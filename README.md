@@ -69,9 +69,14 @@ invent reviews.** Replace each with a real, verifiable client quote and set
 Privacy Policy before publishing; they are a solid starting draft, not legal
 advice.
 
-### 5. Email delivery — `.env.local`
+### 5. Email delivery
 
-The contact form posts to `/api/contact`. Without a mail provider configured it
+**On GitHub Pages this is a repository variable, not a `.env` file** — see
+[Making the contact form work](#making-the-contact-form-work-formspree).
+Until it is set, the form validates and then tells people to WhatsApp or call.
+
+The rest of this section applies only to a Node host (Vercel, a VPS), where
+the built-in `/api/contact` route runs. Without a mail provider configured it
 validates, rejects spam and **logs the enquiry to the server console** so
 nothing is lost silently — but nobody gets an email.
 
@@ -269,22 +274,74 @@ keyboard-closable mobile menu, and `prefers-reduced-motion` honoured globally
 
 ---
 
-## Deploying to Vercel
+## Deploying
 
-1. Push the repository to GitHub.
-2. Import it in Vercel — the framework is detected automatically.
-3. Add the environment variables from `.env.example` in **Project → Settings →
-   Environment Variables**.
-4. Deploy, then point your domain at it.
+The site is hosted on **GitHub Pages** and redeploys on every push to `main`
+via `.github/workflows/deploy-pages.yml`.
 
-After the first deploy:
+Live: https://hashirr786.github.io/Doc-Clearence/
 
-- Submit `https://yourdomain.com/sitemap.xml` in Google Search Console
-- Verify both `/en` and `/ar` are indexed and correctly paired via `hreflang`
-- Test the contact form end to end and confirm the email arrives
-- Run Lighthouse against production
+Pages serves static files only, so the workflow builds with `STATIC_EXPORT=1`.
+That mode swaps three things out:
 
----
+| Server build (Vercel/Node) | Static export (Pages) |
+|---|---|
+| `middleware.ts` picks the locale from `Accept-Language` | `/` is a redirect page that checks `navigator.language` client side |
+| `/api/contact` sends the enquiry email | the form posts to `NEXT_PUBLIC_FORM_ENDPOINT` (see below) |
+| on-demand image optimisation | images served as-is |
+
+### Making the contact form work (Formspree)
+
+Pages cannot run `/api/contact`, so the form needs a hosted endpoint.
+Any JSON-accepting form service works; these are the Formspree steps:
+
+1. Create a free account at [formspree.io](https://formspree.io) and add a
+   form. Use **gulfnejoom@gmail.com** as the destination and confirm the
+   verification email.
+2. Copy the endpoint it gives you — `https://formspree.io/f/xxxxxxxx`.
+3. In the repository: **Settings → Secrets and variables → Actions →
+   Variables → New repository variable**
+   - Name: `NEXT_PUBLIC_FORM_ENDPOINT`
+   - Value: the endpoint URL
+4. Push anything to `main` (or re-run the workflow) to rebuild with it.
+
+The form already sends what Formspree expects: `Accept: application/json` so
+it replies with JSON rather than redirecting, `_gotcha` as the spam honeypot,
+and `_subject` so the notification reads *"Website enquiry — Tasheel
+Services"*. The client-side validation, the honeypot and the time-trap all
+keep working either way.
+
+Free Formspree plans cap monthly submissions — check the current limit if the
+site gets busy. Nothing else needs to change if you later move to a Node host:
+clear the variable and it falls back to the built-in `/api/contact` route.
+
+### Pointing a commercial domain at it
+
+GitHub Pages serves custom domains over HTTPS for free. It is **one
+repository variable** — no code change:
+
+1. **Settings → Secrets and variables → Actions → Variables** → add
+   `CUSTOM_DOMAIN` = `www.gulfnejoom.ae` (whatever you buy).
+2. At your DNS provider, point the domain at GitHub:
+   - a subdomain such as `www` → `CNAME` record to `hashirr786.github.io`
+   - the bare apex `gulfnejoom.ae` → four `A` records to `185.199.108.153`,
+     `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+3. Push to `main`. The workflow writes the `CNAME` file and rebuilds **for the
+   domain root** — the `/Doc-Clearence` base path is dropped automatically,
+   and the canonical URLs, sitemap and Open Graph tags all switch to the new
+   domain.
+4. **Settings → Pages** → enter the domain under *Custom domain* and tick
+   **Enforce HTTPS** once the certificate is issued (usually minutes).
+
+Afterwards, submit the new `https://your-domain/sitemap.xml` in Google Search
+Console and update the Google Business Profile website field to match.
+
+### Other hosts
+
+Any Node host (Vercel, Netlify, a VPS) runs `npm run build` with
+`STATIC_EXPORT` unset and gets the middleware, the contact API and image
+optimisation back. Nothing in the code is Pages-specific — the static mode is
+opt-in.
 
 ## Project structure
 

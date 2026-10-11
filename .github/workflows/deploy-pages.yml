@@ -28,24 +28,40 @@ jobs:
 
       - run: npm ci
 
+      # Moving to a custom domain is ONE repository variable, no code change:
+      # Settings -> Secrets and variables -> Actions -> Variables ->
+      #   CUSTOM_DOMAIN = www.example.ae
+      #
+      # With it set, the site builds for the domain root and a CNAME file is
+      # written. Without it, it builds for the project page sub-path.
+      - name: Resolve deployment target
+        id: target
+        run: |
+          DOMAIN="${{ vars.CUSTOM_DOMAIN }}"
+          if [ -n "$DOMAIN" ]; then
+            echo "base=" >> "$GITHUB_OUTPUT"
+            echo "url=https://$DOMAIN" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=/Doc-Clearence" >> "$GITHUB_OUTPUT"
+            echo "url=https://hashirr786.github.io/Doc-Clearence" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Build static export
         env:
           STATIC_EXPORT: '1'
-          # The site is served from a repository sub-path, not a domain root.
-          NEXT_PUBLIC_BASE_PATH: /Doc-Clearence
-          NEXT_PUBLIC_SITE_URL: https://hashirr786.github.io/Doc-Clearence
-          # Optional: a hosted form endpoint, since Pages cannot run /api.
+          NEXT_PUBLIC_BASE_PATH: ${{ steps.target.outputs.base }}
+          NEXT_PUBLIC_SITE_URL: ${{ steps.target.outputs.url }}
+          # A hosted form endpoint (Formspree), since Pages cannot run /api.
           NEXT_PUBLIC_FORM_ENDPOINT: ${{ vars.NEXT_PUBLIC_FORM_ENDPOINT }}
         run: npm run build
 
       # Stops GitHub skipping the _next directory as a Jekyll partial.
       - run: touch out/.nojekyll
 
-      # Pages must be switched on once by a repo admin
-      # (Settings -> Pages -> Source: GitHub Actions). GITHUB_TOKEN only
-      # reaches write permission and creating a Pages site needs admin, so a
-      # workflow cannot bootstrap it. enablement stays true so this recovers
-      # on its own if the site is ever deleted.
+      - name: Write CNAME for the custom domain
+        if: vars.CUSTOM_DOMAIN != ''
+        run: echo "${{ vars.CUSTOM_DOMAIN }}" > out/CNAME
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true
