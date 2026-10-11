@@ -41,7 +41,12 @@ jobs:
       # Stops GitHub skipping the _next directory as a Jekyll partial.
       - run: touch out/.nojekyll
 
+      # enablement turns GitHub Pages on for the repo (source: GitHub
+      # Actions) the first time this runs, so no manual setup is needed.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
