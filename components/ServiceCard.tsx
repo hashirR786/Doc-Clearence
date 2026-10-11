@@ -22,7 +22,13 @@ export default function ServiceCard({
   return (
     <article
       className={`card card-hover group relative flex h-full flex-col ${
-        floating ? 'bg-white/90 backdrop-blur-md' : ''
+        floating
+          ? // Opaque on phones: a backdrop-filter on fifteen cards stacked over
+            // a seeking video is one of the most expensive things you can ask
+            // a mobile GPU for, and it showed up as scroll jank. The glass
+            // effect returns from the tablet breakpoint up.
+            'bg-white md:bg-white/90 md:backdrop-blur-md'
+          : ''
       }`}
     >
       <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-cream text-gold-dark transition-colors duration-300 group-hover:bg-gold/10">

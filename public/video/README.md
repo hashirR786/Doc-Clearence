@@ -9,8 +9,8 @@ Two scroll-scrubbed videos back the homepage:
 | `services.mp4`         | "What we do" services grid           | Cream veil, dark text over it |
 | `services-mobile.mp4`  | the same, below 768px                | 960px wide                    |
 
-Re-encode the mobile pair whenever you replace the desktop one — same
-settings, with `-vf "scale=960:-2"` added.
+Re-encode the mobile pair whenever you replace the desktop one. They use
+**different settings** from the desktop files — see *Mobile* under Encoding.
 
 Current footage: an aerial UAE skyline at sunset for the hero, and navy
 passports and documents falling into a neat stack for the services grid.
