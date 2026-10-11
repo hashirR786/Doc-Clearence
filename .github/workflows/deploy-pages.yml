@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
@@ -41,8 +41,11 @@ jobs:
       # Stops GitHub skipping the _next directory as a Jekyll partial.
       - run: touch out/.nojekyll
 
-      # enablement turns GitHub Pages on for the repo (source: GitHub
-      # Actions) the first time this runs, so no manual setup is needed.
+      # Pages must be switched on once by a repo admin
+      # (Settings -> Pages -> Source: GitHub Actions). GITHUB_TOKEN only
+      # reaches write permission and creating a Pages site needs admin, so a
+      # workflow cannot bootstrap it. enablement stays true so this recovers
+      # on its own if the site is ever deleted.
       - uses: actions/configure-pages@v5
         with:
           enablement: true
@@ -53,7 +56,7 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
