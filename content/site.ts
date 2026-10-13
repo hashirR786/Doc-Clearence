@@ -86,15 +86,18 @@ export const site = {
     hero: {
       enabled: true,
       src: '/video/hero.mp4',
-      // Served below 768px — same footage, roughly a third of the bytes.
+      // Below 768px: a 9:16 cut of the same footage, so it fills a phone
+      // screen instead of being cropped from landscape.
       srcMobile: '/video/hero-mobile.mp4',
       poster: '/images/hero-poster.jpg',
+      posterMobile: '/images/hero-poster-mobile.jpg',
     },
     services: {
       enabled: true,
       src: '/video/services.mp4',
       srcMobile: '/video/services-mobile.mp4',
       poster: '/images/services-poster.jpg',
+      posterMobile: '/images/services-poster-mobile.jpg',
     },
   },
 

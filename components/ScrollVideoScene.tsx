@@ -6,10 +6,12 @@ import { assetPath } from '@/lib/asset';
 interface ScrollVideoSceneProps {
   /** Compressed MP4 with dense keyframes — see PROJECT-NOTES.md (local). */
   src: string;
-  /** Lighter encode of the same footage, served below 768px. */
+  /** Portrait (9:16) encode of the same footage, served below 768px. */
   srcMobile?: string;
   /** Shown before load, on mobile, on slow links and with reduced motion. */
   poster: string;
+  /** Portrait poster to match `srcMobile`, so phones never flash a cropped landscape still. */
+  posterMobile?: string;
   /** false renders the poster only, with no video request. */
   enabled?: boolean;
   /** Veil over the footage: 'navy' for light text, 'cream' for dark text. */
@@ -50,6 +52,7 @@ export default function ScrollVideoScene({
   src,
   srcMobile,
   poster,
+  posterMobile,
   enabled = true,
   overlay = 'navy',
   className = '',
@@ -63,6 +66,7 @@ export default function ScrollVideoScene({
   // Small screens get a much lighter encode of the same footage.
   const [small, setSmall] = useState(false);
   const activeSrc = small && srcMobile ? srcMobile : src;
+  const activePoster = small && posterMobile ? posterMobile : poster;
   const [near, setNear] = useState(!lazy);
   const [failed, setFailed] = useState(false);
 
@@ -293,7 +297,7 @@ export default function ScrollVideoScene({
             <video
               ref={videoRef}
               className="h-full w-full object-cover"
-              poster={assetPath(poster)}
+              poster={assetPath(activePoster)}
               muted
               playsInline
               preload="auto"
@@ -305,7 +309,7 @@ export default function ScrollVideoScene({
           ) : (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
-              src={assetPath(poster)}
+              src={assetPath(activePoster)}
               alt=""
               className="h-full w-full object-cover"
               fetchPriority={lazy ? 'auto' : 'high'}

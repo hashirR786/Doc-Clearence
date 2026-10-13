@@ -60,6 +60,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
         src={site.video.hero.src}
         srcMobile={site.video.hero.srcMobile}
         poster={site.video.hero.poster}
+        posterMobile={site.video.hero.posterMobile}
         enabled={site.video.hero.enabled}
         overlay="navy"
         className="bg-navy-deep text-white"
@@ -74,6 +75,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
         src={site.video.services.src}
         srcMobile={site.video.services.srcMobile}
         poster={site.video.services.poster}
+        posterMobile={site.video.services.posterMobile}
         enabled={site.video.services.enabled}
         overlay="cream"
         className="bg-cream"
