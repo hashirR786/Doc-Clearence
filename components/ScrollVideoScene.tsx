@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { assetPath } from '@/lib/asset';
 
 interface ScrollVideoSceneProps {
-  /** Compressed MP4 with dense keyframes — see public/video/README.md */
+  /** Compressed MP4 with dense keyframes — see PROJECT-NOTES.md (local). */
   src: string;
   /** Lighter encode of the same footage, served below 768px. */
   srcMobile?: string;

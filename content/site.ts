@@ -74,7 +74,7 @@ export const site = {
    * Scroll-scrubbed background videos.
    *
    * Each `src` must be encoded with dense keyframes (-g 2) or scrubbing will
-   * stutter — see public/video/README.md. Set `enabled: false` on either one
+   * stutter — see PROJECT-NOTES.md (local). Set `enabled: false` on either one
    * to fall back to its poster alone, with no video request at all.
    *
    *  hero     — aerial skyline behind the hero and trust strip (dark footage,
@@ -101,14 +101,12 @@ export const site = {
   /**
    * Trust strip figures.
    *
-   * Years and clients are the figures the client supplied. Documents
-   * processed is an approximation derived from them (1,000+ clients over
-   * 20+ years) — confirm it with the client before launch, or change it
-   * here. Nothing else reads these numbers.
+   * All three figures are the client's. Nothing else reads these numbers,
+   * so this is the only place to change them.
    */
   stats: [
     { value: '20+', label: { en: 'Years of experience', ar: 'سنة من الخبرة' } },
-    { value: '25,000+', label: { en: 'Documents processed', ar: 'معاملة منجزة' } },
+    { value: '15,000+', label: { en: 'Documents processed', ar: 'معاملة منجزة' } },
     { value: '1,000+', label: { en: 'Clients served', ar: 'عميل تمت خدمته' } },
   ],
 };

@@ -17,3 +17,8 @@ next-env.d.ts
 # Source footage — the encoded, web-ready versions live in public/video/
 /video*.mp4
 /2nd.mp4
+
+# Local project documentation — deliberately not published. The repository is
+# public, and anything in public/ is also served on the live site, so the
+# handover notes live here instead of in README.md.
+/PROJECT-NOTES.md
