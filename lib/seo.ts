@@ -123,10 +123,17 @@ export const localBusinessSchema = (locale: Locale) => ({
     opens: h.opens,
     closes: h.closes,
   })),
+  // All seven emirates named individually. The country entry alone would be
+  // true, but naming each one gives Google an explicit signal for searches
+  // like "document clearance Ajman".
   areaServed: [
     { '@type': 'City', name: 'Dubai' },
     { '@type': 'City', name: 'Abu Dhabi' },
     { '@type': 'City', name: 'Sharjah' },
+    { '@type': 'City', name: 'Ajman' },
+    { '@type': 'City', name: 'Ras Al Khaimah' },
+    { '@type': 'City', name: 'Fujairah' },
+    { '@type': 'City', name: 'Umm Al Quwain' },
     { '@type': 'Country', name: 'United Arab Emirates' },
   ],
   sameAs: Object.values(site.social).filter((v) => !v.startsWith('[')),
