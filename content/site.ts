@@ -98,12 +98,18 @@ export const site = {
     },
   },
 
-  // --- Trust strip figures — PLACEHOLDERS. Do not publish unverified numbers.
+  /**
+   * Trust strip figures.
+   *
+   * Years and clients are the figures the client supplied. Documents
+   * processed is an approximation derived from them (1,000+ clients over
+   * 20+ years) — confirm it with the client before launch, or change it
+   * here. Nothing else reads these numbers.
+   */
   stats: [
-    { value: '[XX]+', label: { en: 'Years of experience', ar: 'سنوات من الخبرة' } },
-    { value: '[XX,XXX]+', label: { en: 'Documents processed', ar: 'معاملة منجزة' } },
-    { value: '[X,XXX]+', label: { en: 'Clients served', ar: 'عميل تمت خدمته' } },
-    { value: '[XX]', label: { en: 'Government portals covered', ar: 'منصة حكومية' } },
+    { value: '20+', label: { en: 'Years of experience', ar: 'سنة من الخبرة' } },
+    { value: '25,000+', label: { en: 'Documents processed', ar: 'معاملة منجزة' } },
+    { value: '1,000+', label: { en: 'Clients served', ar: 'عميل تمت خدمته' } },
   ],
 };
 

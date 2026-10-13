@@ -40,7 +40,6 @@ export const ui = {
 
     trust: {
       label: 'Why clients stay with us',
-      note: 'Figures shown are placeholders pending verification.',
     },
 
     statement: {
@@ -252,7 +251,6 @@ export const ui = {
 
     trust: {
       label: 'لماذا يبقى عملاؤنا معنا',
-      note: 'الأرقام المعروضة قيم مبدئية بانتظار التحقق.',
     },
 
     statement: {

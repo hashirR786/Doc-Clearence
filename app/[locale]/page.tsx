@@ -62,7 +62,7 @@ export default function HomePage({ params }: { params: { locale: Locale } }) {
         poster={site.video.hero.poster}
         enabled={site.video.hero.enabled}
         overlay="navy"
-        className="bg-navy text-white"
+        className="bg-navy-deep text-white"
       >
         <Hero locale={locale} />
         <TrustStrip locale={locale} />

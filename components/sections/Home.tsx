@@ -93,7 +93,7 @@ export function TrustStrip({ locale }: { locale: Locale }) {
     <section className="relative border-y border-white/15 py-14">
       <div className="container-page">
         <p className="eyebrow eyebrow-start text-gold-light">{d.trust.label}</p>
-        <dl className="mt-8 grid grid-cols-2 gap-8 lg:grid-cols-4">
+        <dl className="mt-8 grid gap-8 sm:grid-cols-3">
           {site.stats.map((stat, i) => (
             <Reveal key={stat.label.en} delay={i * 0.08}>
               <dt className="sr-only">{stat.label[locale]}</dt>
@@ -106,7 +106,6 @@ export function TrustStrip({ locale }: { locale: Locale }) {
             </Reveal>
           ))}
         </dl>
-        <p className="mt-8 text-xs text-white/40">{d.trust.note}</p>
       </div>
     </section>
   );

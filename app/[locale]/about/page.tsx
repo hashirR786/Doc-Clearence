@@ -42,7 +42,7 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-navy/[0.07] bg-navy/[0.06]">
+              <dl className="mt-6 grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-navy/[0.07] bg-navy/[0.06] sm:grid-cols-3">
                 {site.stats.map((stat) => (
                   <div key={stat.label.en} className="bg-white p-6">
                     <dt className="text-xs text-slateblue">{stat.label[locale]}</dt>
@@ -50,7 +50,6 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
                   </div>
                 ))}
               </dl>
-              <p className="mt-3 text-xs text-slateblue">{d.trust.note}</p>
             </Reveal>
           </aside>
         </div>

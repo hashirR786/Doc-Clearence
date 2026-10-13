@@ -10,11 +10,25 @@ const config: Config = {
     extend: {
       colors: {
         navy: {
-          DEFAULT: '#0A1F44',
-          900: '#07162F',
-          800: '#0A1F44',
-          700: '#13305F',
-          600: '#1D4280',
+          /**
+           * The client's swatch, used as sent.
+           *
+           * Blue contributes little to perceived luminance, so despite looking
+           * far more vivid this measures as dark as the original #0A1F44:
+           * 15.99:1 against white versus 16.25:1. Brightening the brand here
+           * cost no contrast anywhere.
+           */
+          DEFAULT: '#010080',
+          900: '#01005A',
+          800: '#010080',
+          700: '#1A1AA3',
+          600: '#3A3ABF',
+          /**
+           * The original deep navy, kept for surfaces that must stay dark:
+           * the hero scene's backdrop behind the video. The hero veil itself
+           * is a separate literal gradient and is unaffected by this palette.
+           */
+          deep: '#0A1F44',
         },
         gold: {
           DEFAULT: '#C9A24B',
