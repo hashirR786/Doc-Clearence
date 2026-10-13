@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Blocks from '@/components/Blocks';
 import JsonLd from '@/components/JsonLd';
 import Reveal from '@/components/Reveal';
+import CountUp from '@/components/CountUp';
 import { CtaBand, ContactDetails, PageHero } from '@/components/sections/Shared';
 import { about } from '@/content/pages';
 import { site, type Locale } from '@/content/site';
@@ -46,7 +47,12 @@ export default function AboutPage({ params }: { params: { locale: Locale } }) {
                 {site.stats.map((stat) => (
                   <div key={stat.label.en} className="bg-white p-6">
                     <dt className="text-xs text-slateblue">{stat.label[locale]}</dt>
-                    <dd className="mt-1 font-serif text-2xl font-semibold text-gold-dark">{stat.value}</dd>
+                    <dd className="mt-1">
+                      <CountUp
+                        value={stat.value}
+                        className="font-serif text-2xl font-semibold text-gold-dark"
+                      />
+                    </dd>
                   </div>
                 ))}
               </dl>

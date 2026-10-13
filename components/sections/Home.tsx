@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Reveal from '../Reveal';
+import CountUp from '../CountUp';
 import ServiceCard from '../ServiceCard';
 import { ArrowIcon, CheckIcon, WhatsAppIcon } from '../icons';
 import { SectionHeading } from './Shared';
@@ -98,9 +99,10 @@ export function TrustStrip({ locale }: { locale: Locale }) {
             <Reveal key={stat.label.en} delay={i * 0.08}>
               <dt className="sr-only">{stat.label[locale]}</dt>
               <dd>
-                <span className="block font-serif text-3xl font-semibold text-gold-light sm:text-4xl">
-                  {stat.value}
-                </span>
+                <CountUp
+                  value={stat.value}
+                  className="block font-serif text-3xl font-semibold text-gold-light sm:text-4xl"
+                />
                 <span className="mt-2 block text-sm text-white/65">{stat.label[locale]}</span>
               </dd>
             </Reveal>
