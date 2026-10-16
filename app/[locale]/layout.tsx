@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import FloatingWhatsApp from '@/components/FloatingWhatsApp';
 import CookieBanner from '@/components/CookieBanner';
+import ViewTransitions from '@/components/ViewTransitions';
 import JsonLd from '@/components/JsonLd';
 import { locales, site, type Locale } from '@/content/site';
 import { t } from '@/content/ui';
@@ -90,6 +91,7 @@ export default function LocaleLayout({
         <Footer locale={locale} />
         <FloatingWhatsApp locale={locale} />
         <CookieBanner locale={locale} />
+        <ViewTransitions />
 
         <JsonLd data={[organizationSchema(), localBusinessSchema(locale)]} />
       </body>

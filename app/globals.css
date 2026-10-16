@@ -147,3 +147,65 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Page transitions (View Transitions API)
+   Driven by components/ViewTransitions.tsx. Browsers without support ignore
+   all of this and navigate normally.
+   --------------------------------------------------------------------------- */
+
+/* Naming the header and footer lifts them out of the full-page snapshot, so
+   they hold still while the content beneath them changes. Without this the
+   whole viewport cross-fades and the fixed header visibly flickers. */
+header {
+  view-transition-name: site-header;
+}
+
+footer {
+  view-transition-name: site-footer;
+}
+
+main {
+  view-transition-name: page-content;
+}
+
+::view-transition-old(page-content) {
+  animation: vt-out 180ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(page-content) {
+  animation: vt-in 280ms cubic-bezier(0, 0, 0.2, 1) 60ms both;
+}
+
+/* The header and footer are identical across routes, so hold them steady
+   rather than cross-fading two copies of the same thing. */
+::view-transition-old(site-header),
+::view-transition-new(site-header),
+::view-transition-old(site-footer),
+::view-transition-new(site-footer) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* Honour the motion preference: still a transition, just an instant one. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
