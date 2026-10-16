@@ -98,6 +98,11 @@ export default function ScrollVideoScene({
   useEffect(() => {
     if (!enabled || !near) return;
 
+    // Which cut to serve is a question about the viewport, not about whether
+    // the video plays — so decide it before any early return below, or the
+    // ?video=1 preview override would hand a phone the desktop file.
+    setSmall(window.matchMedia('(max-width: 767px)').matches);
+
     // ?video=1 forces the video on so the effect can be previewed from a
     // device or connection that would otherwise fall back to the poster.
     // Remembered for the tab so it survives client-side navigation.
@@ -136,7 +141,6 @@ export default function ScrollVideoScene({
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
 
-    setSmall(window.matchMedia('(max-width: 767px)').matches);
     setUseVideo(!reduced && conn?.saveData !== true);
   }, [enabled, near]);
 
