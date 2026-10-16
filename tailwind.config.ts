@@ -35,7 +35,12 @@ const config: Config = {
           light: '#E3C46F',
           dark: '#A8853A',
         },
-        slateblue: '#5B6784',
+        slateblue: {
+          DEFAULT: '#5B6784',
+          // A touch darker, for body text on the translucent service cards
+          // over the video. Buys the contrast that pays for the transparency.
+          ink: '#4A5570',
+        },
         cream: '#F8F6F1',
       },
       fontFamily: {

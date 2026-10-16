@@ -23,11 +23,12 @@ export default function ServiceCard({
     <article
       className={`card card-hover group relative flex h-full flex-col ${
         floating
-          ? // Opaque on phones: a backdrop-filter on fifteen cards stacked over
-            // a seeking video is one of the most expensive things you can ask
-            // a mobile GPU for, and it showed up as scroll jank. The glass
-            // effect returns from the tablet breakpoint up.
-            'bg-white md:bg-white/90 md:backdrop-blur-md'
+          ? // Translucent so the footage reads through. The blur is desktop
+            // only: a backdrop-filter on fifteen cards stacked over a seeking
+            // video is punishing on a mobile GPU and showed as scroll jank.
+            // A plain translucent background costs nothing, so phones keep
+            // the transparency without it.
+            'bg-white/75 md:backdrop-blur-md'
           : ''
       }`}
     >
@@ -41,11 +42,30 @@ export default function ServiceCard({
         </Link>
       </h3>
 
-      <p className="mt-2.5 flex-1 text-sm leading-relaxed text-slateblue">{c.summary}</p>
+      <p
+        className={`mt-2.5 flex-1 text-sm leading-relaxed ${
+          // Darker ink only where the card is translucent — at 75% white over
+          // the video, the standard slate drops to 4.04:1 and fails AA.
+          floating ? 'text-slateblue-ink' : 'text-slateblue'
+        }`}
+      >
+        {c.summary}
+      </p>
 
-      <span className="mt-5 inline-flex items-center gap-2 text-[13px] font-semibold text-gold-dark">
+      <span
+        className={`mt-5 inline-flex items-center gap-2 text-[13px] font-semibold ${
+          // Gold reaches only 2.47:1 against a 75%-white card over the video,
+          // so the translucent variant uses navy for the label and keeps the
+          // gold on the arrow, where it is decoration rather than text.
+          floating ? 'text-navy' : 'text-gold-dark'
+        }`}
+      >
         {d.cta.viewService}
-        <ArrowIcon className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1" />
+        <ArrowIcon
+          className={`h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1 rtl:rotate-180 rtl:group-hover:-translate-x-1 ${
+            floating ? 'text-gold-dark' : ''
+          }`}
+        />
       </span>
     </article>
   );
