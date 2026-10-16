@@ -4,6 +4,16 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 /**
+ * Next's router works in paths WITHOUT the deployment base path — it adds it
+ * back itself — while `location.pathname` and `anchor.href` include it. Mixing
+ * the two pushes /Doc-Clearence/Doc-Clearence/... and the navigation silently
+ * does nothing.
+ */
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const stripBase = (path: string) =>
+  basePath && path.startsWith(basePath) ? path.slice(basePath.length) || '/' : path;
+
+/**
  * Cross-fades between pages using the View Transitions API.
  *
  * The native `@view-transition` CSS rule only covers full document loads, and
@@ -60,7 +70,7 @@ export default function ViewTransitions() {
       // InvalidStateError — which swallowed the navigation entirely. A
       // cross-fade is worth little there in any case, since the whole page
       // changes direction.
-      const localeOf = (path: string) => path.split('/').filter(Boolean)[0];
+      const localeOf = (path: string) => stripBase(path).split('/').filter(Boolean)[0];
       if (localeOf(url.pathname) !== localeOf(window.location.pathname)) return;
 
       event.preventDefault();
@@ -90,7 +100,7 @@ export default function ViewTransitions() {
               resolve();
             };
 
-            router.push(url.pathname + url.search + url.hash);
+            router.push(stripBase(url.pathname) + url.search + url.hash);
           }),
       );
 
