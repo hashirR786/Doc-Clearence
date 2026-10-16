@@ -209,3 +209,66 @@ main {
     animation: none !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Logo hover glint
+   The sweep is masked by the logo image itself, so the highlight follows the
+   GN mark and the wordmark rather than sitting over them as a block.
+   --------------------------------------------------------------------------- */
+
+.logo-glint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background-image: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(227, 196, 111, 0.85) 48%,
+    rgba(255, 245, 214, 0.95) 52%,
+    transparent 62%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  background-position: 135% 0;
+
+  -webkit-mask-image: var(--logo-mask);
+  mask-image: var(--logo-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+.group\/logo:hover .logo-glint,
+.group\/logo:focus-visible .logo-glint {
+  animation: logo-glint 900ms ease-out;
+}
+
+@keyframes logo-glint {
+  0% {
+    opacity: 0;
+    background-position: 135% 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    background-position: -45% 0;
+  }
+}
+
+/* Masking is the whole mechanism here — without it the gradient would paint a
+   rectangle across the logo. Hide the effect entirely where it is unsupported
+   rather than show that block. */
+@supports not ((-webkit-mask-image: url('')) or (mask-image: url(''))) {
+  .logo-glint {
+    display: none;
+  }
+}

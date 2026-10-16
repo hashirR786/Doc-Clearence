@@ -36,7 +36,7 @@ export default function Logo({
   return (
     <Link
       href={href(locale)}
-      className={`inline-flex shrink-0 items-center ${className}`}
+      className={`group/logo relative inline-flex shrink-0 items-center ${className}`}
       aria-label={`${site.shortName} — ${locale === 'ar' ? 'الصفحة الرئيسية' : 'home'}`}
     >
       <Image
@@ -46,8 +46,23 @@ export default function Logo({
         height={height}
         priority={priority}
         sizes={`${height * 2}px`}
-        className="h-auto w-auto object-contain"
+        className="h-auto w-auto object-contain transition-transform duration-500 ease-out
+                   group-hover/logo:scale-[1.04] group-focus-visible/logo:scale-[1.04]"
         style={{ height: `${height}px` }}
+      />
+
+      {/*
+        A gold glint that sweeps across on hover.
+
+        The logo is raster artwork, so its shape is recovered by using the
+        same file as a CSS mask: the highlight then paints only on the mark
+        and the lettering, never as a rectangle over them. It reuses the
+        image already in cache, so it costs no extra request.
+      */}
+      <span
+        aria-hidden="true"
+        className="logo-glint"
+        style={{ ['--logo-mask' as string]: `url(${src})` } as React.CSSProperties}
       />
     </Link>
   );
