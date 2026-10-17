@@ -16,8 +16,16 @@ import { testimonials } from '@/content/general';
 export function Hero({ locale }: { locale: Locale }) {
   const d = t(locale);
 
+  /*
+   * The hero padding is deliberately lopsided. items-center puts the block
+   * at the true centre, which reads as sitting low and left a bare band
+   * under the header; the heavier bottom padding lifts it to the optical
+   * centre — measured 173px clear above and 189px below at 1440x800. The
+   * top value still clears the header on short viewports, where the section
+   * outgrows 100svh and the padding anchors the content instead.
+   */
   return (
-    <section className="relative flex min-h-[100svh] items-center pb-24 pt-32">
+    <section className="relative flex min-h-[100svh] items-center pb-40 pt-24">
         <div className="container-page">
           <Reveal className="max-w-3xl">
             <p className="eyebrow eyebrow-start text-gold-light">{d.hero.label}</p>
@@ -25,6 +33,10 @@ export function Hero({ locale }: { locale: Locale }) {
             <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
               {d.hero.title}
             </h1>
+
+            <p className="mt-7 max-w-2xl text-pretty text-[1.0625rem] leading-relaxed text-white/80 sm:text-lg">
+              {d.hero.subtitle}
+            </p>
 
             {/*
               The hero leads with the phone number itself: calling and texting
