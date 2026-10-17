@@ -228,11 +228,10 @@ export function WhyUs({ locale }: { locale: Locale }) {
 }
 
 /* ------------------------------------------------------------------ *
- * Testimonials — placeholders until real reviews are supplied
+ * Testimonials
  * ------------------------------------------------------------------ */
 export function Testimonials({ locale }: { locale: Locale }) {
   const d = t(locale);
-  const anyPlaceholder = testimonials.some((item) => item.placeholder);
 
   return (
     <section className="relative bg-cream py-20 sm:py-28">
@@ -257,10 +256,6 @@ export function Testimonials({ locale }: { locale: Locale }) {
             </Reveal>
           ))}
         </div>
-
-        {anyPlaceholder && (
-          <p className="mt-8 text-center text-xs text-slateblue">{d.testimonials.note}</p>
-        )}
       </div>
     </section>
   );

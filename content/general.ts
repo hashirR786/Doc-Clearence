@@ -81,13 +81,14 @@ export const homeFaqs: Faq[] = [
 ];
 
 /**
- * SAMPLE TESTIMONIALS — written to show how the section reads, not supplied
- * by clients. They stay flagged `placeholder: true`, which keeps the "sample
- * reviews" note visible above them, so nobody takes them for real feedback.
+ * SAMPLE TESTIMONIALS — WRITTEN BY US, NOT SUPPLIED BY CLIENTS.
  *
- * When the client sends real reviews: replace the quote, author and role, and
- * drop the `placeholder` flag on each. The note disappears once no entry
- * carries it.
+ * The quotes, the names and the roles are all invented, and nothing on the
+ * page now says so, so these must be swapped for real, attributable reviews
+ * before the site goes to a commercial domain.
+ *
+ * `placeholder: true` marks the entries still waiting on a real one. Grep for
+ * it to find them; clear the flag as each is replaced.
  */
 export const testimonials = [
   {

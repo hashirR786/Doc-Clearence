@@ -113,7 +113,6 @@ export const ui = {
     testimonials: {
       label: 'Client feedback',
       title: 'What clients say',
-      note: 'Sample reviews, shown to illustrate the layout — real client feedback will replace them.',
     },
 
     faq: {
@@ -334,7 +333,6 @@ export const ui = {
     testimonials: {
       label: 'آراء العملاء',
       title: 'ماذا يقول عملاؤنا',
-      note: 'آراء توضيحية لبيان شكل القسم — وستحلّ محلها آراء عملاء حقيقية.',
     },
 
     faq: { label: 'أسئلة', title: 'الأسئلة الشائعة' },
