@@ -7,6 +7,7 @@ export const vatRegistration: Service = {
   related: ['corporate-tax-registration', 'business-consultation', 'pro-services'],
   keywords: [
     'VAT registration UAE',
+    'value added tax UAE',
     'VAT registration Dubai',
     'FTA VAT certificate',
     'VAT deregistration UAE',

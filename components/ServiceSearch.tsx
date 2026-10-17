@@ -28,6 +28,9 @@ export default function ServiceSearch({ locale }: { locale: Locale }) {
         s[locale].h1,
         s.en.name,
         s.slug.replace(/-/g, ' '),
+        // The category is a word people actually type: "tax" should reach VAT
+        // as well as corporate tax, even though VAT's own name never says it.
+        s.category,
         ...s.keywords,
       ]
         .join(' ')
