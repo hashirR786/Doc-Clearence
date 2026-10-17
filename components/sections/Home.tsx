@@ -22,7 +22,13 @@ export function Hero({ locale }: { locale: Locale }) {
           <Reveal className="max-w-3xl">
             <p className="eyebrow eyebrow-start text-gold-light">{d.hero.label}</p>
 
-            <h1 className="mt-6 text-balance text-4xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
+            {/*
+              Base size is a step down from the other headings: this one is a
+              full sentence, and at text-4xl it ran to five lines on a 375px
+              phone and pushed the opening hours below the fold. Tablet and
+              desktop have the width to carry the larger sizes.
+            */}
+            <h1 className="mt-6 text-balance text-3xl font-semibold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
               {d.hero.title}
             </h1>
 
