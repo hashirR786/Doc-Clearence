@@ -99,11 +99,6 @@ export default function Footer({ locale }: { locale: Locale }) {
               </Link>
             </li>
             <li>
-              <Link href={href(locale, 'blog')} className="transition-colors hover:text-gold-light">
-                {d.nav.blog}
-              </Link>
-            </li>
-            <li>
               <Link href={href(locale, 'contact')} className="transition-colors hover:text-gold-light">
                 {d.nav.contact}
               </Link>

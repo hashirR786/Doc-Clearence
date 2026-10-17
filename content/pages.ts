@@ -243,8 +243,8 @@ export const terms = {
     },
     {
       type: 'p',
-      en: 'These terms are governed by the laws of the United Arab Emirates, and the courts of [EMIRATE] have jurisdiction over any dispute arising from them.',
-      ar: 'تخضع هذه الشروط لقوانين دولة الإمارات العربية المتحدة، وتختص محاكم [EMIRATE] بأي نزاع ينشأ عنها.',
+      en: 'These terms are governed by the laws of the United Arab Emirates.',
+      ar: 'تخضع هذه الشروط لقوانين دولة الإمارات العربية المتحدة.',
     },
   ] as Block[],
 };
