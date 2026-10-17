@@ -33,9 +33,7 @@ export const ui = {
 
     hero: {
       label: 'Document Clearance · PRO · Typing Centre',
-      title: 'Document clearance and government transactions, handled end to end.',
-      subtitle:
-        'Gulf Nejoom is a private document clearance and PRO services company in the UAE. We prepare, submit and follow up your applications across immigration, Tasheel, Emirates ID, attestation, tax and business setup — so you do not have to queue.',
+      title: 'Document clearance, handled end to end.',
       scroll: 'Scroll to explore',
     },
 
@@ -253,9 +251,7 @@ export const ui = {
 
     hero: {
       label: 'تخليص المستندات · خدمات العلاقات العامة · مركز طباعة',
-      title: 'تخليص المستندات والمعاملات الحكومية، من البداية حتى الإنجاز.',
-      subtitle:
-        'الخليج نجوم شركة خاصة لتخليص المستندات وخدمات العلاقات العامة في الإمارات. نُعدّ معاملاتكم ونقدّمها ونتابعها في الهجرة وتسهيل والهوية الإماراتية والتصديق والضرائب وتأسيس الأعمال — دون عناء الانتظار.',
+      title: 'تخليص المستندات، من البداية حتى الإنجاز.',
       scroll: 'مرّر للأسفل',
     },
 
