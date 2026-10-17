@@ -187,14 +187,14 @@ export default function ContactForm({
   };
 
   if (status === 'sent' && composed) {
-    // Always offer the other channel. The one that just ran may not have
-    // opened at all — no WhatsApp installed, no mail client configured, a
-    // number not yet registered — and the visitor cannot tell us that.
+    // The hand-off can fail silently — a blocked tab, WhatsApp not installed
+    // — and the visitor has no way to tell us. So the confirmation repeats
+    // the same link, which costs nothing and turns a dead end into one click.
     const fallback =
       composed.via === 'whatsapp'
-        ? { href: composed.email, label: d.form.fallbackEmail }
-        : composed.whatsapp
-          ? { href: composed.whatsapp, label: d.form.fallbackWhatsapp }
+        ? { href: composed.whatsapp, label: d.form.fallbackWhatsapp }
+        : composed.via === 'email'
+          ? { href: composed.email, label: d.form.fallbackEmail }
           : null;
 
     return (
@@ -347,7 +347,7 @@ export default function ContactForm({
                 rel={composed.whatsapp ? 'noopener noreferrer' : undefined}
                 className="font-semibold underline underline-offset-4"
               >
-                {composed.whatsapp ? d.form.fallbackWhatsapp : d.form.fallbackEmail}
+                {composed.whatsapp ? d.cta.whatsapp : d.form.fallbackEmail}
               </a>
             </p>
           )}

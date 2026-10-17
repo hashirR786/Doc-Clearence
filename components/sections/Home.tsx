@@ -2,10 +2,10 @@ import Link from 'next/link';
 import Reveal from '../Reveal';
 import CountUp from '../CountUp';
 import ServiceCard from '../ServiceCard';
-import { ArrowIcon, CheckIcon, WhatsAppIcon } from '../icons';
+import { ArrowIcon, ChatIcon, CheckIcon, PhoneIcon } from '../icons';
 import { SectionHeading } from './Shared';
 import { services } from '@/content/services';
-import { site, whatsappLink, type Locale } from '@/content/site';
+import { site, type Locale } from '@/content/site';
 import { t } from '@/content/ui';
 import { href } from '@/lib/locale';
 import { testimonials } from '@/content/general';
@@ -30,27 +30,29 @@ export function Hero({ locale }: { locale: Locale }) {
               {d.hero.subtitle}
             </p>
 
+            {/*
+              The hero leads with the phone number itself: calling and texting
+              work from any handset with nothing installed, which is the
+              shortest path to a person. The quote form further down is where
+              a detailed enquiry goes.
+            */}
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <a
-                href={whatsappLink(locale)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-gold"
-              >
-                <WhatsAppIcon className="h-4 w-4" />
-                {d.cta.whatsapp}
+              <a href={`tel:${site.phoneHref}`} className="btn-gold">
+                <PhoneIcon className="h-4 w-4" />
+                <span dir="ltr">{site.phone}</span>
               </a>
-              <Link href={href(locale, 'contact')} className="btn-outline-light">
-                {d.cta.consult}
-              </Link>
+              <a href={`sms:${site.phoneHref}`} className="btn-outline-light">
+                <ChatIcon className="h-4 w-4" />
+                {d.cta.message}
+              </a>
             </div>
 
             <p className="mt-8 text-sm text-white/55">
-              <a href={`tel:${site.phoneHref}`} className="transition-colors hover:text-gold-light" dir="ltr">
-                {site.phone}
-              </a>
-              <span className="mx-3 text-white/25">·</span>
               {site.openingHoursLabel[locale]}
+              <span className="mx-3 text-white/25">·</span>
+              <Link href={href(locale, 'contact')} className="transition-colors hover:text-gold-light">
+                {d.cta.consult}
+              </Link>
             </p>
           </Reveal>
         </div>

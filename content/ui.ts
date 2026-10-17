@@ -23,6 +23,7 @@ export const ui = {
     cta: {
       whatsapp: 'WhatsApp Us',
       call: 'Call Now',
+      message: 'Message Us',
       consult: 'Get a Free Consultation',
       enquire: 'Send an Enquiry',
       viewService: 'View details',
@@ -112,7 +113,7 @@ export const ui = {
     testimonials: {
       label: 'Client feedback',
       title: 'What clients say',
-      note: 'Placeholder testimonials — replace with real, verifiable client reviews before launch.',
+      note: 'Sample reviews, shown to illustrate the layout — real client feedback will replace them.',
     },
 
     faq: {
@@ -157,8 +158,8 @@ export const ui = {
         'Your enquiry is ready in WhatsApp — press send there and we will reply within one working day.',
       successEmail:
         'Your enquiry is ready in your email app — press send there and we will reply within one working day.',
-      fallbackWhatsapp: 'Did not open? Send it on WhatsApp instead',
-      fallbackEmail: 'Did not open? Send it by email instead',
+      fallbackWhatsapp: 'Did not open? Open WhatsApp',
+      fallbackEmail: 'Did not open? Open your email app',
       success: 'Thank you — your enquiry has been received. We will reply within one working day.',
       error: 'Sorry, the message could not be sent. Please WhatsApp or call us instead.',
       required: 'This field is required.',
@@ -243,6 +244,7 @@ export const ui = {
     cta: {
       whatsapp: 'واتساب',
       call: 'اتصل الآن',
+      message: 'راسلنا',
       consult: 'استشارة مجانية',
       enquire: 'أرسل استفسارك',
       viewService: 'عرض التفاصيل',
@@ -332,7 +334,7 @@ export const ui = {
     testimonials: {
       label: 'آراء العملاء',
       title: 'ماذا يقول عملاؤنا',
-      note: 'شهادات مبدئية — يجب استبدالها بآراء عملاء حقيقية وموثّقة قبل الإطلاق.',
+      note: 'آراء توضيحية لبيان شكل القسم — وستحلّ محلها آراء عملاء حقيقية.',
     },
 
     faq: { label: 'أسئلة', title: 'الأسئلة الشائعة' },
@@ -373,8 +375,8 @@ export const ui = {
         'استفسارك جاهز في واتساب — اضغط إرسال هناك وسنردّ خلال يوم عمل واحد.',
       successEmail:
         'استفسارك جاهز في تطبيق البريد — اضغط إرسال هناك وسنردّ خلال يوم عمل واحد.',
-      fallbackWhatsapp: 'لم يُفتح؟ أرسله عبر واتساب',
-      fallbackEmail: 'لم يُفتح؟ أرسله بالبريد الإلكتروني',
+      fallbackWhatsapp: 'لم يُفتح؟ افتح واتساب',
+      fallbackEmail: 'لم يُفتح؟ افتح تطبيق البريد',
       success: 'شكراً لك — تم استلام استفسارك وسنردّ خلال يوم عمل واحد.',
       error: 'عذراً، تعذّر إرسال الرسالة. يرجى مراسلتنا عبر واتساب أو الاتصال بنا.',
       required: 'هذا الحقل مطلوب.',

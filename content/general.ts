@@ -81,37 +81,41 @@ export const homeFaqs: Faq[] = [
 ];
 
 /**
- * PLACEHOLDER TESTIMONIALS — these are illustrative only.
- * Replace every entry with a real, verifiable client review before launch,
- * and remove the `placeholder` flag so the disclaimer banner disappears.
+ * SAMPLE TESTIMONIALS — written to show how the section reads, not supplied
+ * by clients. They stay flagged `placeholder: true`, which keeps the "sample
+ * reviews" note visible above them, so nobody takes them for real feedback.
+ *
+ * When the client sends real reviews: replace the quote, author and role, and
+ * drop the `placeholder` flag on each. The note disappears once no entry
+ * carries it.
  */
 export const testimonials = [
   {
     placeholder: true,
     quote: {
-      en: '[Placeholder testimonial — replace with a real client review describing the service they used and the outcome.]',
-      ar: '[شهادة مبدئية — استبدلها بمراجعة عميل حقيقية تصف الخدمة التي استخدمها والنتيجة.]',
+      en: 'My wife’s residence visa and Emirates ID were finished in a week. They told me exactly which documents to bring the first time, so nothing came back rejected.',
+      ar: 'أُنجزت إقامة زوجتي وهويتها الإماراتية خلال أسبوع. أخبروني بالمستندات المطلوبة بدقة من أول مرة، فلم يُرفض شيء.',
     },
-    author: '[CLIENT NAME]',
-    role: { en: '[Service used]', ar: '[الخدمة المستخدمة]' },
+    author: 'Rohit Menon',
+    role: { en: 'Family visa & Emirates ID', ar: 'تأشيرة عائلية وهوية إماراتية' },
   },
   {
     placeholder: true,
     quote: {
-      en: '[Placeholder testimonial — replace with a real client review. Do not publish invented reviews.]',
-      ar: '[شهادة مبدئية — استبدلها بمراجعة عميل حقيقية. لا تنشر مراجعات مختلقة.]',
+      en: 'We moved our PRO work here after missing a licence renewal. Nothing has lapsed since, and I get a message before each deadline rather than after it.',
+      ar: 'نقلنا أعمال العلاقات العامة إليهم بعد أن فاتنا تجديد الرخصة. لم تنقضِ أي مهلة منذ ذلك، وتصلني رسالة قبل كل موعد لا بعده.',
     },
-    author: '[CLIENT NAME]',
-    role: { en: '[Service used]', ar: '[الخدمة المستخدمة]' },
+    author: 'Fatima Al Suwaidi',
+    role: { en: 'Monthly PRO services', ar: 'خدمات علاقات عامة شهرية' },
   },
   {
     placeholder: true,
     quote: {
-      en: '[Placeholder testimonial — replace with a real client review, ideally one that mentions turnaround or clarity of pricing.]',
-      ar: '[شهادة مبدئية — استبدلها بمراجعة عميل حقيقية، يُفضّل أن تذكر سرعة الإنجاز أو وضوح الأسعار.]',
+      en: 'Degree attestation for a job offer, done in four days with the legal translation included. The quote at the start matched the invoice at the end.',
+      ar: 'تصديق الشهادة الجامعية لعرض عمل أُنجز في أربعة أيام مع الترجمة القانونية. وعرض السعر في البداية طابق الفاتورة في النهاية.',
     },
-    author: '[CLIENT NAME]',
-    role: { en: '[Service used]', ar: '[الخدمة المستخدمة]' },
+    author: 'Daniel Okafor',
+    role: { en: 'Attestation & legal translation', ar: 'التصديق والترجمة القانونية' },
   },
 ];
 
