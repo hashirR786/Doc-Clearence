@@ -150,14 +150,9 @@ export default function Footer({ locale }: { locale: Locale }) {
         <div className="gold-rule" />
         <div className="py-7 text-xs leading-relaxed text-white/55">
           <p className="mb-3">{d.footer.disclaimer}</p>
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <p>
-              © {year} {site.legalName}. {d.footer.rights}
-            </p>
-            <p>
-              {d.contact.licenceLabel}: {site.tradeLicense}
-            </p>
-          </div>
+          <p>
+            © {year} {site.legalName}. {d.footer.rights}
+          </p>
         </div>
       </div>
     </footer>

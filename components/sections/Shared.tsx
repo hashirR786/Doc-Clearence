@@ -191,10 +191,6 @@ export function ContactDetails({ locale }: { locale: Locale }) {
           </div>
         </div>
       ))}
-      <div className="gold-rule" />
-      <p className="text-xs text-slateblue">
-        {d.contact.licenceLabel}: {site.tradeLicense}
-      </p>
     </address>
   );
 }

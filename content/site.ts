@@ -20,7 +20,23 @@ export const site = {
   phoneHref: '+971523240888', // digits only with country code
   whatsapp: '971523240888', // digits only, no leading +
   email: 'gulfnejoom@gmail.com',
-  tradeLicense: '[TRADE LICENSE NO.]',
+
+  /**
+   * Where the enquiry form delivers.
+   *
+   *   'whatsapp' — composes the enquiry into a pre-filled WhatsApp message to
+   *                the number above; the sender presses send in WhatsApp.
+   *   'email'    — composes the same enquiry as a mailto: draft to the address
+   *                above, opened in the sender's own mail app.
+   *   'endpoint' — POSTs JSON to NEXT_PUBLIC_FORM_ENDPOINT (a hosted form
+   *                service), or to our own /api/contact on a Node host.
+   *
+   * The first two need no server and no third-party service, which is what a
+   * static host requires. Whichever is primary, the confirmation screen always
+   * offers the other one, so an enquiry is never trapped behind one channel —
+   * including right now, while the number is not yet registered on WhatsApp.
+   */
+  enquiryChannel: 'whatsapp' as 'whatsapp' | 'email' | 'endpoint',
 
   address: {
     street: 'Office No. GR 09, New Al Safiya Building, Hor Al Anz',

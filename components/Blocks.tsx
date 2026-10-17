@@ -4,9 +4,7 @@ import { site, type Locale } from '@/content/site';
 
 /**
  * Business details written into prose use tokens rather than literals, so the
- * legal pages cannot drift from content/site.ts. The trade licence is still
- * unknown, so its token renders the placeholder and stays visible until the
- * real number is filled in once, in site.ts.
+ * legal pages cannot drift from content/site.ts.
  */
 const fill = (text: string) =>
   text
@@ -15,8 +13,7 @@ const fill = (text: string) =>
     .replace(
       /\{\{address\}\}/g,
       `${site.address.street}, ${site.address.district}, ${site.address.locality}`,
-    )
-    .replace(/\{\{licence\}\}/g, site.tradeLicense);
+    );
 
 /** Renders the bilingual block format used by blog posts and static pages. */
 export default function Blocks({ blocks, locale }: { blocks: Block[]; locale: Locale }) {

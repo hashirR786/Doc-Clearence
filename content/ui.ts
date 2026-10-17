@@ -100,7 +100,7 @@ export const ui = {
         },
         {
           title: 'Licensed and accountable',
-          body: 'We are a private service provider licensed in the UAE (Trade Licence [TRADE LICENSE NO.]) — not a government entity.',
+          body: 'A private service provider licensed in the UAE — not a government entity, and clear about the difference.',
         },
         {
           title: 'Updates you do not have to chase',
@@ -134,7 +134,6 @@ export const ui = {
       phoneLabel: 'Phone',
       emailLabel: 'Email',
       hoursLabel: 'Opening hours',
-      licenceLabel: 'Trade licence',
       mapTitle: 'Gulf Nejoom office location on Google Maps',
     },
 
@@ -149,7 +148,17 @@ export const ui = {
       messagePlaceholder: 'Tell us what you need processed and the deadline, if any.',
       consent: 'I agree to Gulf Nejoom contacting me about this enquiry.',
       submit: 'Send enquiry',
+      submitWhatsapp: 'Send on WhatsApp',
+      submitEmail: 'Send by email',
       sending: 'Sending…',
+      opening: 'Opening…',
+      enquirySubject: 'Website enquiry',
+      successWhatsapp:
+        'Your enquiry is ready in WhatsApp — press send there and we will reply within one working day.',
+      successEmail:
+        'Your enquiry is ready in your email app — press send there and we will reply within one working day.',
+      fallbackWhatsapp: 'Did not open? Send it on WhatsApp instead',
+      fallbackEmail: 'Did not open? Send it by email instead',
       success: 'Thank you — your enquiry has been received. We will reply within one working day.',
       error: 'Sorry, the message could not be sent. Please WhatsApp or call us instead.',
       required: 'This field is required.',
@@ -311,7 +320,7 @@ export const ui = {
         },
         {
           title: 'مرخّصون ومسؤولون',
-          body: 'نحن مزوّد خدمة خاص مرخّص في الإمارات (رخصة تجارية [TRADE LICENSE NO.]) ولسنا جهة حكومية.',
+          body: 'مزوّد خدمة خاص مرخّص في الإمارات — لسنا جهة حكومية، ونوضّح الفرق بوضوح.',
         },
         {
           title: 'تحديثات دون متابعة منك',
@@ -341,7 +350,6 @@ export const ui = {
       phoneLabel: 'الهاتف',
       emailLabel: 'البريد الإلكتروني',
       hoursLabel: 'ساعات العمل',
-      licenceLabel: 'الرخصة التجارية',
       mapTitle: 'موقع مكتب الخليج نجوم على خرائط جوجل',
     },
 
@@ -356,7 +364,17 @@ export const ui = {
       messagePlaceholder: 'أخبرنا بالمعاملة المطلوبة والموعد النهائي إن وُجد.',
       consent: 'أوافق على تواصل الخليج نجوم معي بخصوص هذا الاستفسار.',
       submit: 'إرسال الاستفسار',
+      submitWhatsapp: 'إرسال عبر واتساب',
+      submitEmail: 'إرسال بالبريد الإلكتروني',
       sending: 'جارٍ الإرسال…',
+      opening: 'جارٍ الفتح…',
+      enquirySubject: 'استفسار من الموقع',
+      successWhatsapp:
+        'استفسارك جاهز في واتساب — اضغط إرسال هناك وسنردّ خلال يوم عمل واحد.',
+      successEmail:
+        'استفسارك جاهز في تطبيق البريد — اضغط إرسال هناك وسنردّ خلال يوم عمل واحد.',
+      fallbackWhatsapp: 'لم يُفتح؟ أرسله عبر واتساب',
+      fallbackEmail: 'لم يُفتح؟ أرسله بالبريد الإلكتروني',
       success: 'شكراً لك — تم استلام استفسارك وسنردّ خلال يوم عمل واحد.',
       error: 'عذراً، تعذّر إرسال الرسالة. يرجى مراسلتنا عبر واتساب أو الاتصال بنا.',
       required: 'هذا الحقل مطلوب.',
