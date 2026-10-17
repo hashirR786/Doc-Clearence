@@ -47,8 +47,8 @@ export const about = {
     },
     {
       type: 'p',
-      en: 'We are a private service provider licensed in the UAE under trade licence [TRADE LICENSE NO.]. We are not a government department, we are not affiliated with any government authority, and we cannot influence a decision that belongs to one. Government fees are set by the relevant authority and we charge them at cost, with the receipt. Where a matter needs a licensed advocate, a registered tax agent or a qualified accountant, we will say so and refer you rather than improvise.',
-      ar: 'نحن مزوّد خدمة خاص مرخّص في الإمارات بموجب الرخصة التجارية [TRADE LICENSE NO.]. لسنا دائرة حكومية ولا تربطنا علاقة بأي جهة حكومية ولا يمكننا التأثير في قرار يعود إليها. والرسوم الحكومية تحددها الجهة المختصة ونحصّلها كما هي مع الإيصال. وحين تتطلب المسألة محامياً مرخّصاً أو وكيلاً ضريبياً مسجّلاً أو محاسباً مؤهلاً، نقول ذلك ونحيلك بدل الارتجال.',
+      en: 'We are a private service provider licensed in the UAE under trade licence {{licence}}. We are not a government department, we are not affiliated with any government authority, and we cannot influence a decision that belongs to one. Government fees are set by the relevant authority and we charge them at cost, with the receipt. Where a matter needs a licensed advocate, a registered tax agent or a qualified accountant, we will say so and refer you rather than improvise.',
+      ar: 'نحن مزوّد خدمة خاص مرخّص في الإمارات بموجب الرخصة التجارية {{licence}}. لسنا دائرة حكومية ولا تربطنا علاقة بأي جهة حكومية ولا يمكننا التأثير في قرار يعود إليها. والرسوم الحكومية تحددها الجهة المختصة ونحصّلها كما هي مع الإيصال. وحين تتطلب المسألة محامياً مرخّصاً أو وكيلاً ضريبياً مسجّلاً أو محاسباً مؤهلاً، نقول ذلك ونحيلك بدل الارتجال.',
     },
     {
       type: 'h2',
@@ -145,8 +145,8 @@ export const privacy = {
     },
     {
       type: 'p',
-      en: 'You can ask us what data we hold about you, ask us to correct it, or ask us to delete it where we are not required to keep it. Contact us at [EMAIL] or [PHONE], or write to us at [ADDRESS].',
-      ar: 'يمكنك أن تسألنا عن البيانات التي نحتفظ بها عنك أو تطلب تصحيحها أو حذفها حين لا يلزمنا القانون بحفظها. تواصل معنا على [EMAIL] أو [PHONE] أو راسلنا على [ADDRESS].',
+      en: 'You can ask us what data we hold about you, ask us to correct it, or ask us to delete it where we are not required to keep it. Contact us at {{email}} or {{phone}}, or write to us at {{address}}.',
+      ar: 'يمكنك أن تسألنا عن البيانات التي نحتفظ بها عنك أو تطلب تصحيحها أو حذفها حين لا يلزمنا القانون بحفظها. تواصل معنا على {{email}} أو {{phone}} أو راسلنا على {{address}}.',
     },
   ] as Block[],
 };
@@ -173,8 +173,8 @@ export const terms = {
     },
     {
       type: 'p',
-      en: 'Gulf Nejoom Documents Clearance Service L.L.C is a private company licensed in the UAE under trade licence [TRADE LICENSE NO.]. We prepare, submit and follow up applications through official channels on your instruction. We are not a government entity, we do not make decisions on applications, and we cannot influence the outcome of a decision that belongs to a government authority.',
-      ar: 'الخليج نجوم لخدمات تخليص المستندات ذ.م.م شركة خاصة مرخّصة في الإمارات بموجب الرخصة التجارية [TRADE LICENSE NO.]. نُعدّ الطلبات ونقدّمها ونتابعها عبر القنوات الرسمية بناءً على تكليفك. ولسنا جهة حكومية ولا نتخذ قرارات بشأن الطلبات ولا يمكننا التأثير في نتيجة قرار يعود إلى جهة حكومية.',
+      en: 'Gulf Nejoom Documents Clearance Service L.L.C is a private company licensed in the UAE under trade licence {{licence}}. We prepare, submit and follow up applications through official channels on your instruction. We are not a government entity, we do not make decisions on applications, and we cannot influence the outcome of a decision that belongs to a government authority.',
+      ar: 'الخليج نجوم لخدمات تخليص المستندات ذ.م.م شركة خاصة مرخّصة في الإمارات بموجب الرخصة التجارية {{licence}}. نُعدّ الطلبات ونقدّمها ونتابعها عبر القنوات الرسمية بناءً على تكليفك. ولسنا جهة حكومية ولا نتخذ قرارات بشأن الطلبات ولا يمكننا التأثير في نتيجة قرار يعود إلى جهة حكومية.',
     },
     {
       type: 'h2',
