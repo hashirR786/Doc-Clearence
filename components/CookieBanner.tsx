@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { Locale } from '@/content/site';
 import { t } from '@/content/ui';
 import { href } from '@/lib/locale';
@@ -16,6 +16,7 @@ const KEY = 'gn-cookie-consent';
 export default function CookieBanner({ locale }: { locale: Locale }) {
   const d = t(locale);
   const [show, setShow] = useState(false);
+  const banner = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     try {
@@ -24,6 +25,30 @@ export default function CookieBanner({ locale }: { locale: Locale }) {
       // Storage blocked (private mode) — do not nag on every page view.
     }
   }, []);
+
+  /**
+   * The floating WhatsApp button sits in the same corner and was hidden
+   * behind this banner. Rather than have it guess an offset — the banner is
+   * one line on a desktop and three on a narrow phone — publish the measured
+   * height as a custom property for anything that needs to sit clear of it.
+   * Neither component has to import the other.
+   */
+  useEffect(() => {
+    const root = document.documentElement;
+    const el = banner.current;
+    if (!el) {
+      root.style.setProperty('--gn-cookie-banner', '0px');
+      return;
+    }
+    const publish = () => root.style.setProperty('--gn-cookie-banner', `${el.offsetHeight}px`);
+    publish();
+    const observer = new ResizeObserver(publish);
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      root.style.setProperty('--gn-cookie-banner', '0px');
+    };
+  }, [show]);
 
   const decide = (value: 'accepted' | 'declined') => {
     try {
@@ -40,6 +65,7 @@ export default function CookieBanner({ locale }: { locale: Locale }) {
 
   return (
     <div
+      ref={banner}
       role="dialog"
       aria-live="polite"
       aria-label={d.cookies.policy}
