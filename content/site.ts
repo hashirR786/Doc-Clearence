@@ -13,7 +13,10 @@ export const site = {
     en: 'Documents Clearance Service L.L.C',
     ar: 'ذ.م.م لخدمات تخليص المستندات',
   },
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://www.gulfnejoom.ae',
+  // The deploy workflow passes NEXT_PUBLIC_SITE_URL; this fallback is what a
+  // local build uses, and it is the registered domain so canonicals, the
+  // sitemap and the OG tags never point somewhere that does not exist.
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://gulfnejoom.com',
 
   // --- NAP (Name, Address, Phone) — keep identical everywhere -------------
   phone: '+971 52 324 0888',
